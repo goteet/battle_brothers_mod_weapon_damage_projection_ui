@@ -95,24 +95,30 @@
 			if( r != null )
 			{
 				local lastTileHovered = this.Tactical.State.getLastTileHovered();
-				local CoordinateDesc = "Position=(" + lastTileHovered.Coords.X + ", " + lastTileHovered.Coords.Y +")";
-				local actor = this.Tactical.TurnSequenceBar.getActiveEntity();
-				if (actor != null)
+				if(lastTileHovered != null)
 				{
-					local tile = actor.getTile();
-					CoordinateDesc += ", Distance=" + lastTileHovered.getDistanceTo(tile);
-
-					local direction8 = tile.getDirection8To(lastTileHovered);
-					local direction  = tile.getDirectionTo(lastTileHovered);
-					r.push(
+					local CoordinateDesc = "Position=(" + lastTileHovered.Coords.X + ", " + lastTileHovered.Coords.Y +")";
+					local actor = this.Tactical.TurnSequenceBar.getActiveEntity();
+					if (actor != null)
 					{
-						id = 91,
-						type = "text",
-						text = "Direction = " + this.Const.Strings.Direction[direction] + ", D8 = " + this.Const.Strings.Direction8[direction8]
-					});
-				}
+						local tile = actor.getTile();
+						if(tile != null)
+						{
+							CoordinateDesc += ", Distance=" + lastTileHovered.getDistanceTo(tile);
 
-				r.push({ id = 92, type = "text", text = CoordinateDesc });
+							local direction8 = tile.getDirection8To(lastTileHovered);
+							local direction  = tile.getDirectionTo(lastTileHovered);
+							r.push(
+							{
+								id = 91,
+								type = "text",
+								text = "Direction = " + this.Const.Strings.Direction[direction] + ", D8 = " + this.Const.Strings.Direction8[direction8]
+							});
+						}
+					}
+
+					r.push({ id = 92, type = "text", text = CoordinateDesc });
+				}
 			}
 			return r;
 		});
