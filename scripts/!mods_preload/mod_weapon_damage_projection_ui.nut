@@ -86,43 +86,40 @@
 	::mods_hookNewObject("skills/actives/split_man", skill_hook_function);
 
 	
-	::mods_hookNewObject("ui/screens/tooltip/tooltip_events", function ( events )
-	{
-		local tactical_queryTileTooltipData = ::mods_getMember(events, "tactical_queryTileTooltipData");
-		::mods_override(events, "tactical_queryTileTooltipData", function()
-		{
-			local r = tactical_queryTileTooltipData();
-			if( r != null )
-			{
-				local lastTileHovered = this.Tactical.State.getLastTileHovered();
-				if(lastTileHovered != null)
-				{
-					local CoordinateDesc = "Position=(" + lastTileHovered.Coords.X + ", " + lastTileHovered.Coords.Y +")";
-					local actor = this.Tactical.TurnSequenceBar.getActiveEntity();
-					if (actor != null)
-					{
-						local tile = actor.getTile();
-						if(tile != null)
-						{
-							CoordinateDesc += ", Distance=" + lastTileHovered.getDistanceTo(tile);
-
-							local direction8 = tile.getDirection8To(lastTileHovered);
-							local direction  = tile.getDirectionTo(lastTileHovered);
-							r.push(
-							{
-								id = 91,
-								type = "text",
-								text = "Direction = " + this.Const.Strings.Direction[direction] + ", D8 = " + this.Const.Strings.Direction8[direction8]
-							});
-						}
-					}
-
-					r.push({ id = 92, type = "text", text = CoordinateDesc });
-				}
-			}
-			return r;
-		});
-
-	});
+	//::mods_hookNewObject("ui/screens/tooltip/tooltip_events", function ( events )
+	//{
+	//	local tactical_queryTileTooltipData = ::mods_getMember(events, "tactical_queryTileTooltipData");
+	//	::mods_override(events, "tactical_queryTileTooltipData", function()
+	//	{
+	//		local r = tactical_queryTileTooltipData();
+	//		if( r != null )
+	//		{
+	//			local lastTileHovered = this.Tactical.State.getLastTileHovered();
+	//			if(lastTileHovered != null)
+	//			{
+	//				local CoordinateDesc = "Position=(" + lastTileHovered.Coords.X + ", " + lastTileHovered.Coords.Y +")";
+	//				local actor = this.Tactical.TurnSequenceBar.getActiveEntity();
+	//				if (actor != null)
+	//				{
+	//					local tile = actor.getTile();
+	//					if(tile != null)
+	//					{
+	//						CoordinateDesc += ", Distance=" + lastTileHovered.getDistanceTo(tile);
+	//						local direction8 = tile.getDirection8To(lastTileHovered);
+	//						local direction  = tile.getDirectionTo(lastTileHovered);
+	//						r.push(
+	//						{
+	//							id = 91,
+	//							type = "text",
+	//							text = "Direction = " + this.Const.Strings.Direction[direction] + ", D8 = " + this.Const.Strings.Direction8[direction8]
+	//						});
+	//					}
+	//				}
+	//				r.push({ id = 92, type = "text", text = CoordinateDesc });
+	//			}
+	//		}
+	//		return r;
+	//	});
+	//});
 	
 });
