@@ -85,6 +85,47 @@
 	::mods_hookNewObject("skills/actives/smite_skill", skill_hook_function);
 	::mods_hookNewObject("skills/actives/split_man", skill_hook_function);
 
+	local PercentToIndex = function(percent)
+	{
+		if(percent <= 5)	return 1;
+		if(percent <= 35)	return 2;
+		if(percent <= 65)	return 3;
+		if(percent <= 95)	return 4;
+		return 5;
+	}
+	::mods_hookNewObject("ui/global/data_helper", function ( helper )
+	{
+		local addCharacterToUIData = ::mods_getMember(helper, "addCharacterToUIData");
+		::mods_override(helper, "addCharacterToUIData", function(_entity, _target)
+		{
+			addCharacterToUIData( _entity, _target );
+
+			local acur = _entity.getArmor(this.Const.BodyPart.Body);
+			local hcur = _entity.getArmor(this.Const.BodyPart.Head);
+			local amax = _entity.getArmorMax(this.Const.BodyPart.Body);
+			local hmax = _entity.getArmorMax(this.Const.BodyPart.Head);
+			
+			if(hmax == hcur)
+			{
+				_target.helmetIcon <- "";
+			}
+			else
+			{
+				local h = this.Math.floor(hcur * 100.0 / hmax);
+				_target.helmetIcon <- "ui/icons/helmet_condition_0" + PercentToIndex(h) + ".png";
+			}
+
+			if(acur == amax)
+			{
+				_target.armorIcon <- "";
+			}
+			else
+			{
+				local a = this.Math.floor(acur * 100.0 / amax);
+				_target.armorIcon <- "ui/icons/armor_condition_0" + PercentToIndex(a) + ".png";
+			}
+		});
+	});
 	
 	//::mods_hookNewObject("ui/screens/tooltip/tooltip_events", function ( events )
 	//{
@@ -123,3 +164,8 @@
 	//});
 	
 });
+
+
+
+::mods_registerJS("brothers_panel_expand.js")
+::mods_registerCSS("brothers_panel_expand.css")
