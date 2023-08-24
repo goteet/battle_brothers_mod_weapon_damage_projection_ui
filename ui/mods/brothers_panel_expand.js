@@ -259,6 +259,7 @@ CharacterScreenBrothersListModule.prototype.updateBrotherSlot = function (_data)
     
     if(this.mDataSource.getInventoryMode() == CharacterScreenDatasourceIdentifier.InventoryMode.Stash)
     {
+        var character = _data[CharacterScreenIdentifier.Entity.Character.Key];
         slot.showListBrotherArmorImage(this.IsMoodVisible, character['armorIcon']);
         slot.showListBrotherHelmetImage(this.IsMoodVisible, character['helmetIcon']);
     }
