@@ -98,7 +98,7 @@ $.fn.showListBrotherHelmetImage = function (_value, _image)
 		if (_image !== undefined && _image != "")
 			image.attr('src', Path.GFX + _image);
 
-		if(_value === true)
+		if(_value === true && _image != "")
 		{
 			moodLayer.removeClass('display-none').addClass('display-block');
 		}
@@ -119,7 +119,7 @@ $.fn.showListBrotherArmorImage = function (_value, _image)
 		if (_image !== undefined&& _image != "")
 			image.attr('src', Path.GFX + _image);
 
-		if(_value === true)
+		if(_value === true && _image != "")
 		{
 			moodLayer.removeClass('display-none').addClass('display-block');
 		}

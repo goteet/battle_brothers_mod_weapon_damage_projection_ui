@@ -95,11 +95,8 @@
 	}
 	::mods_hookNewObject("ui/global/data_helper", function ( helper )
 	{
-		local addCharacterToUIData = ::mods_getMember(helper, "addCharacterToUIData");
-		::mods_override(helper, "addCharacterToUIData", function(_entity, _target)
+		local updateArmorStats = function(_entity, _target)
 		{
-			addCharacterToUIData( _entity, _target );
-
 			local acur = _entity.getArmor(this.Const.BodyPart.Body);
 			local hcur = _entity.getArmor(this.Const.BodyPart.Head);
 			local amax = _entity.getArmorMax(this.Const.BodyPart.Body);
@@ -124,7 +121,16 @@
 				local a = this.Math.floor(acur * 100.0 / amax);
 				_target.armorIcon <- "ui/icons/armor_condition_0" + PercentToIndex(a) + ".png";
 			}
+		};
+
+		local convertEntityToUIData = ::mods_getMember(helper, "convertEntityToUIData");
+		::mods_override(helper, "convertEntityToUIData", function(_entity, _activeEntity )
+		{
+			local result = convertEntityToUIData(_entity, _activeEntity);
+			updateArmorStats(_entity, result.character);
+			return result;
 		});
+		
 	});
 	
 	//::mods_hookNewObject("ui/screens/tooltip/tooltip_events", function ( events )
