@@ -267,3 +267,12 @@ CharacterScreenBrothersListModule.prototype.updateBrotherSlot = function (_data)
     this.updateBrotherSlot_(_data);
 
 };
+
+
+TacticalScreenTopbarEventLogModule.prototype.create_ = TacticalScreenTopbarEventLogModule.prototype.create;
+TacticalScreenTopbarEventLogModule.prototype.create = function(_parentDiv)
+{
+	this.mMaxVisibleEntries = 100;
+    this.mNormalHeight = '7.0rem';
+    this.create_(_parentDiv);   
+}

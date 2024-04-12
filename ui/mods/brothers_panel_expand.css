@@ -41,3 +41,18 @@
 
     pointer-events: none;
 }
+
+.tactical-screen .topbar-event-log-module .l-event-logs-container
+{
+    height: 7.0rem;
+}
+
+.tactical-screen .topbar-container .left-module-container
+{
+    height  : 8.8rem;
+}
+
+.ui-control.tactical-screen .left-module-container
+{
+    background-size: 34.8rem 8.8rem;
+}
