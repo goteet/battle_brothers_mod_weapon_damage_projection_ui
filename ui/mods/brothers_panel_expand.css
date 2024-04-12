@@ -44,6 +44,7 @@
 
 .tactical-screen .topbar-event-log-module .l-event-logs-container
 {
+    top: 0.0rem;
     height: 7.0rem;
 }
 
@@ -54,5 +55,7 @@
 
 .ui-control.tactical-screen .left-module-container
 {
+    
+    background-image: url("coui://gfx/ui/skin/tactical_header_left_expanded.png");
     background-size: 34.8rem 8.8rem;
 }
